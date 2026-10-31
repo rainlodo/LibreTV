@@ -21,9 +21,76 @@ const SITE_CONFIG = {
 };
 
 // API站点配置
-// 空壳设计：不内置任何数据源，部署者需在「设置 → 自定义API」中添加自己的采集站。
-// 这样避免内置源失效/违规带来的维护与合规风险。
-const API_SITES = {};
+// 2026-10-31 实测可用（返回JSON且含m3u8播放地址），按响应速度排序
+const API_SITES = {
+    lzlz: {
+        api: 'http://cj.lziapi.com/api.php/provide/vod/from/lzm3u8',
+        name: '量子资源',
+    },
+    dyttzy: {
+        api: 'http://caiji.dyttzyapi.com/api.php/provide/vod',
+        name: '电影天堂资源',
+        detail: 'http://caiji.dyttzyapi.com',
+    },
+    ffzy: {
+        api: 'http://ffzy5.tv/api.php/provide/vod',
+        name: '非凡影视',
+        detail: 'http://ffzy5.tv',
+    },
+    zuid: {
+        api: 'https://api.zuidapi.com/api.php/provide/vod',
+        name: '最大资源',
+    },
+    jisu: {
+        api: 'https://jszyapi.com/api.php/provide/vod',
+        name: '极速资源',
+        detail: 'https://jszyapi.com',
+    },
+    bfzy: {
+        api: 'https://bfzyapi.com/api.php/provide/vod',
+        name: '暴风资源',
+    },
+    ikun: {
+        api: 'https://ikunzyapi.com/api.php/provide/vod',
+        name: 'iKun资源',
+    },
+    gszy: {
+        api: 'https://api.guangsuapi.com/api.php/provide/vod/from/gsm3u8',
+        name: '光速资源',
+    },
+    jyzy: {
+        api: 'https://jyzyapi.com/provide/vod/from/jinyingm3u8',
+        name: '金鹰资源',
+    },
+    maoyan: {
+        api: 'https://api.maoyanapi.top/api.php/provide/vod',
+        name: '猫眼资源',
+    },
+    zy360: {
+        api: 'https://360zy.com/api.php/provide/vod',
+        name: '360资源',
+    },
+    mdzy: {
+        api: 'https://www.mdzyapi.com/api.php/provide/vod',
+        name: '魔都资源',
+    },
+    ruyi: {
+        api: 'https://cj.rycjapi.com/api.php/provide/vod',
+        name: '如意资源',
+    },
+    baidu: {
+        api: 'https://api.apibdzy.com/api.php/provide/vod',
+        name: '百度云资源',
+    },
+    hongniu: {
+        api: 'http://hongniuzy2.com/api.php/provide/vod/from/hnm3u8',
+        name: '红牛资源',
+    },
+    iqiyi: {
+        api: 'https://iqiyizyapi.com/api.php/provide/vod',
+        name: 'iqiyi资源',
+    },
+};
 
 // 定义合并方法
 function extendAPISites(newSites) {
@@ -82,7 +149,7 @@ const API_CONFIG = {
 };
 
 // 优化后的正则表达式模式
-const M3U8_PATTERN = /\$https?:\/\/[^"'\s]+?\.m3u8/g;
+const M3U8_PATTERN = /\\$https?:\\/\\/[^"'\\s]+?\\.m3u8/g;
 
 // 添加自定义播放器URL
 const CUSTOM_PLAYER_URL = 'player.html'; // 使用相对路径引用本地player.html
